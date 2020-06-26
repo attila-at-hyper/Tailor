@@ -65,18 +65,18 @@ public extension PathAccessible {
             keyPath: Array(path.split(".").dropLast()).joined(separator: "."))
   }
 
-  @available(*, deprecated: 1.1.3, message: "Use resolve(keyPath:)")
-  public func path(_ path: [SubscriptKind]) -> [String: Any]? { return internalResolve(path) }
-  @available(*, deprecated: 1.1.3, message: "Use resolve(keyPath:)")
-  public func path<T>(_ path: String) -> T? { return resolve(keyPath: path) as? T }
-  @available(*, deprecated: 1.1.3, message: "Use resolve(keyPath:)")
-  public func path(_ path: String) -> String? { return resolve(keyPath: path) }
-  @available(*, deprecated: 1.1.3, message: "Use resolve(keyPath:)")
-  public func path(_ path: String) -> Int? { return resolve(keyPath: path) }
-  @available(*, deprecated: 1.1.3, message: "Use resolve(keyPath:)")
-  public func path(_ path: String) -> [[String: Any]]? { return resolve(keyPath: path) }
-  @available(*, deprecated: 1.1.3, message: "Use resolve(keyPath:)")
-  public func path(_ path: String) -> [String: Any]? { return resolve(keyPath: path) }
+  @available(*, deprecated, message: "Use resolve(keyPath:)")
+  func path(_ path: [SubscriptKind]) -> [String: Any]? { return internalResolve(path) }
+  @available(*, deprecated, message: "Use resolve(keyPath:)")
+  func path<T>(_ path: String) -> T? { return resolve(keyPath: path) as? T }
+  @available(*, deprecated, message: "Use resolve(keyPath:)")
+  func path(_ path: String) -> String? { return resolve(keyPath: path) }
+  @available(*, deprecated, message: "Use resolve(keyPath:)")
+  func path(_ path: String) -> Int? { return resolve(keyPath: path) }
+  @available(*, deprecated, message: "Use resolve(keyPath:)")
+  func path(_ path: String) -> [[String: Any]]? { return resolve(keyPath: path) }
+  @available(*, deprecated, message: "Use resolve(keyPath:)")
+  func path(_ path: String) -> [String: Any]? { return resolve(keyPath: path) }
 
   /**
    Resolve key path to Dictionary

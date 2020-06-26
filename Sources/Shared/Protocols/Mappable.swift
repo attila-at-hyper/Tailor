@@ -8,7 +8,7 @@ public extension Mappable {
    - Parameter key: The key name of the property you want to lookup
    - Returns: A generic value on success, otherwise it throws a MappableError.
    */
-  public func value<T>(_ key: String) throws -> T {
+  func value<T>(_ key: String) throws -> T {
     let value = Mirror(reflecting: self)
       .children
       .filter { $0.label == key }
@@ -25,7 +25,7 @@ public extension Mappable {
    - Parameter key: The key name of the property you want to lookup
    - Returns: An optional generic value.
    */
-  public func property<T>(_ key: String, dictionary: T? = nil) -> T? {
+  func property<T>(_ key: String, dictionary: T? = nil) -> T? {
     let components = key.components(separatedBy: ".")
     let values = Mirror(reflecting: self)
       .children
@@ -62,7 +62,7 @@ public extension Mappable {
   /**
    - Returns: A key-value dictionary.
    */
-  public func properties() -> [String: Any] {
+  func properties() -> [String: Any] {
     var properties = [String: Any]()
 
     for tuple in Mirror(reflecting: self).children {
@@ -76,7 +76,7 @@ public extension Mappable {
   /**
    - Returns: A string based dictionary.
    */
-  public func types() -> [String: String] {
+  func types() -> [String: String] {
     var types = [String: String]()
     for tuple in Mirror(reflecting: self).children {
       guard let key = tuple.label else { continue }
@@ -85,6 +85,6 @@ public extension Mappable {
     return types
   }
 
-  public func keys() -> [String] { return Mirror(reflecting: self).children.map { $0.0! } }
-  public func values() -> [Any] { return Mirror(reflecting: self).children.map { $1 } }
+  func keys() -> [String] { return Mirror(reflecting: self).children.map { $0.0! } }
+  func values() -> [Any] { return Mirror(reflecting: self).children.map { $1 } }
 }
