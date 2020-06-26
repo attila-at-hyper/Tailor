@@ -1,3 +1,3 @@
 public protocol SafeMappable {
-  init(_ map: [String : Any]) throws
+  init(_ map: [String: Any]) throws
 }

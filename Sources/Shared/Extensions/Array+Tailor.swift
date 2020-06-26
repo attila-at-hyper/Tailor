@@ -9,13 +9,13 @@ public extension Array {
 
     if let name = name {
       for dictionary in self {
-        guard let dictionary = dictionary as? [String : Any],
-          let value = dictionary[name] as? [String : Any] else { continue }
+        guard let dictionary = dictionary as? [String: Any],
+          let value = dictionary[name] as? [String: Any] else { continue }
         objects.append(T(value))
       }
     } else {
       for dictionary in self {
-        guard let dictionary = dictionary as? [String : Any] else { continue }
+        guard let dictionary = dictionary as? [String: Any] else { continue }
         objects.append(T(dictionary))
       }
     }
@@ -32,13 +32,13 @@ public extension Array {
 
     if let name = name {
       for dictionary in self {
-        guard let dictionary = dictionary as? [String : Any],
-          let value = dictionary[name] as? [String : Any] else { continue }
+        guard let dictionary = dictionary as? [String: Any],
+          let value = dictionary[name] as? [String: Any] else { continue }
         objects.append(try T(value))
       }
     } else {
       for dictionary in self {
-        guard let dictionary = dictionary as? [String : Any] else { continue }
+        guard let dictionary = dictionary as? [String: Any] else { continue }
         objects.append(try T(dictionary))
       }
     }
@@ -50,8 +50,8 @@ public extension Array {
    - Parameter name: The index
    - Returns: A child dictionary at that index, otherwise it returns nil
    */
-  func dictionary(_ index: Int) -> [String : Any]? {
-    guard index < self.count, let value = self[index] as? [String : Any]
+  func dictionary(_ index: Int) -> [String: Any]? {
+    guard index < self.count, let value = self[index] as? [String: Any]
       else { return nil }
 
     return value
@@ -61,8 +61,8 @@ public extension Array {
    - Parameter name: The index
    - Returns: A child array at that index, otherwise it returns nil
    */
-  func array(_ index: Int) -> [[String : Any]]? {
-    guard index < self.count, let value = self[index] as? [[String : Any]]
+  func array(_ index: Int) -> [[String: Any]]? {
+    guard index < self.count, let value = self[index] as? [[String: Any]]
       else { return nil }
 
     return value

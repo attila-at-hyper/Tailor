@@ -61,8 +61,8 @@ public extension Dictionary {
     }
 
     if let value: String = property(name) {
-      if let firstCharacter = value.characters.first, value.characters.count > 1 {
-        return Int(String(firstCharacter))
+      if value.count > 1 {
+        return Int(value.prefix(1))
       }
 
       return Int(value)
@@ -186,15 +186,15 @@ public extension Dictionary {
    - Parameter name: The name of the property that you want to map
    - Returns: A mappable object directory, otherwise it returns nil
    */
-  func directory<T: Mappable>(_ name: String) -> [String : T]? {
+  func directory<T: Mappable>(_ name: String) -> [String: T]? {
     guard let key = name as? Key,
-      let dictionary = self[key] as? [String : Any]
+      let dictionary = self[key] as? [String: Any]
       else { return nil }
 
     var directory = [String: T]()
 
     for (key, value) in dictionary {
-      guard let value = value as? [String : Any] else { continue }
+      guard let value = value as? [String: Any] else { continue }
       directory[key] = T(value)
     }
 
@@ -205,9 +205,9 @@ public extension Dictionary {
    - Parameter name: The name of the key
    - Returns: A child dictionary for that key, otherwise it returns nil
    */
-  func dictionary(_ name: String) -> [String : Any]? {
+  func dictionary(_ name: String) -> [String: Any]? {
     guard let key = name as? Key,
-      let value = self[key] as? [String : Any]
+      let value = self[key] as? [String: Any]
       else { return nil }
 
     return value
@@ -217,9 +217,9 @@ public extension Dictionary {
    - Parameter name: The name of the key
    - Returns: A child array for that key, otherwise it returns nil
    */
-  func array(_ name: String) -> [[String : Any]]? {
+  func array(_ name: String) -> [[String: Any]]? {
     guard let key = name as? Key,
-      let value = self[key] as? [[String : Any]]
+      let value = self[key] as? [[String: Any]]
       else { return nil }
 
     return value
@@ -248,7 +248,7 @@ public extension Dictionary {
    */
   func relation<T: Mappable>(_ name: String) -> T? {
     guard let key = name as? Key,
-      let dictionary = self[key] as? [String : Any]
+      let dictionary = self[key] as? [String: Any]
       else { return nil }
 
     return T(dictionary)
@@ -260,7 +260,7 @@ public extension Dictionary {
    */
   func relation<T: SafeMappable>(_ name: String) -> T? {
     guard let key = name as? Key,
-      let dictionary = self[key] as? [String : Any]
+      let dictionary = self[key] as? [String: Any]
       else { return nil }
 
     let result: T?
@@ -285,7 +285,7 @@ public extension Dictionary {
    */
   func relations<T: Mappable>(_ name: String) -> [T]? {
     guard let key = name as? Key,
-      let array = self[key] as? [[String : Any]]
+      let array = self[key] as? [[String: Any]]
       else { return nil }
 
     return array.map { T($0) }
@@ -297,7 +297,7 @@ public extension Dictionary {
    */
   func relations<T: SafeMappable>(_ name: String) -> [T]? {
     guard let key = name as? Key,
-      let array = self[key] as? [[String : Any]]
+      let array = self[key] as? [[String: Any]]
       else { return nil }
 
     var result = [T]()
@@ -320,7 +320,7 @@ public extension Dictionary {
    */
   func relationHierarchically<T>(_ name: String) -> T? where T: Mappable, T: HierarchyType {
     guard let key = name as? Key,
-      let dictionary = self[key] as? [String : Any]
+      let dictionary = self[key] as? [String: Any]
       else { return nil }
 
     return T.cluster(dictionary) as? T
@@ -332,9 +332,9 @@ public extension Dictionary {
    */
   func relationsHierarchically<T>(_ name: String) -> [T]? where T: Mappable, T: HierarchyType {
     guard let key = name as? Key,
-      let array = self[key] as? [[String : Any]]
+      let array = self[key] as? [[String: Any]]
       else { return nil }
 
-    return array.flatMap { T.cluster($0) as? T }
+    return array.compactMap { T.cluster($0) as? T }
   }
 }

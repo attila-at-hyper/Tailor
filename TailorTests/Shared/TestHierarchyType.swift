@@ -79,8 +79,8 @@ class TestHierarchyType: QuickSpec {
                     ]
                 ]
                 notification = Notification(json as [String : Any])
-                push = notification.events[0] as! PushEvent
-                issue = notification.events[1] as! IssueEvent
+                push = (notification.events[0] as! PushEvent)
+                issue = (notification.events[1] as! IssueEvent)
             }
 
             context("push") {

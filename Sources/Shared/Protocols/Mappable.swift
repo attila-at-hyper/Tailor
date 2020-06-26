@@ -1,5 +1,5 @@
 public protocol Mappable {
-  init(_ map: [String : Any])
+  init(_ map: [String: Any])
 }
 
 public extension Mappable {
@@ -49,7 +49,7 @@ public extension Mappable {
 
       if tail.count > 1 {
         guard let range = key.range(of: indexString) else { return nil }
-        let key = key.substring(from: range.lowerBound)
+        let key = String(key[range.lowerBound...])
         return property(key, dictionary: result)
       } else {
         return result
@@ -62,7 +62,7 @@ public extension Mappable {
   /**
    - Returns: A key-value dictionary.
    */
-  public func properties() -> [String : Any] {
+  public func properties() -> [String: Any] {
     var properties = [String: Any]()
 
     for tuple in Mirror(reflecting: self).children {
@@ -76,7 +76,7 @@ public extension Mappable {
   /**
    - Returns: A string based dictionary.
    */
-  public func types() -> [String : String] {
+  public func types() -> [String: String] {
     var types = [String: String]()
     for tuple in Mirror(reflecting: self).children {
       guard let key = tuple.label else { continue }
